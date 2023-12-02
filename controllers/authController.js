@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 // import bcryptjs from 'bcryptjs'
 import { errorHandler } from "../utils/error.js";
+import res from "express/lib/response.js";
 
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -85,3 +86,12 @@ export const google = async (req, res, next) => {
     next(error);
   }
 };
+
+export const signOut = (req,res,next) =>{
+  try {
+    res.clearCookie('access_token');
+    res.status(200).json('User has been logged out!');
+  } catch (error) {
+    next(error)
+  }
+}
