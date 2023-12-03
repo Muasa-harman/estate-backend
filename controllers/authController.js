@@ -53,10 +53,10 @@ export const google = async (req, res, next) => {
 
     let currentUser;
     if (user) {
-        const { password: pass, ...rest } = user._doc;
-        currentUser = rest;
-        const token = jwt.sign({ id: currentUser._id }, process.env.JWT);
-        res
+      const { password: pass, ...rest } = user._doc;
+      currentUser = rest;
+      const token = jwt.sign({ id: currentUser._id }, process.env.JWT);
+      res
         .cookie("access_token", token, { httpOnly: true })
         .status(200)
         .json(rest);
@@ -75,7 +75,7 @@ export const google = async (req, res, next) => {
       });
       await newUser.save();
       const { password: pass, ...rest } = newUser._doc;
-      currentUser = rest
+      currentUser = rest;
     }
     const token = jwt.sign({ id: currentUser._id }, process.env.JWT);
     res
@@ -87,11 +87,11 @@ export const google = async (req, res, next) => {
   }
 };
 
-export const signOut = (req,res,next) =>{
+export const signOut = (req, res, next) => {
   try {
-    res.clearCookie('access_token');
-    res.status(200).json('User has been logged out!');
+    res.clearCookie("access_token");
+    res.status(200).json("User has been logged out!");
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};

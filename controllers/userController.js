@@ -38,24 +38,22 @@ export const deleteUser = async (req, res, next) => {
     return next(errorHandler(401, "You can only delete your own account!"));
   try {
     await User.findByIdAndDelete(req.params.id);
-    res.clearCookie('access_token')
-    res.status(200).json({ message: "successfully deleted the user" })
+    res.clearCookie("access_token");
+    res.status(200).json({ message: "successfully deleted the user" });
   } catch (error) {
     next(error);
   }
 };
 
-export const getUserListing = async(req,res,next) =>{
+export const getUserListing = async (req, res, next) => {
   try {
-      if(req.user.id === req.params.id){
-      const listings = await Listing.find({userRef: req.params.id});
+    if (req.user.id === req.params.id) {
+      const listings = await Listing.find({ userRef: req.params.id });
       res.status(200).json(listings);
     } else {
       return next(errorHandler(401, "You can only view your own listing!"));
     }
-    } catch (error) {
-      next(error);
-      
-    }
-
-}
+  } catch (error) {
+    next(error);
+  }
+};
