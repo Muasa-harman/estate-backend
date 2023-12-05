@@ -7,5 +7,6 @@ router.post('/create',verifyToken, listingController.createListing)
 router.post('/update/:id', verifyToken, listingController.updateListing)
 router.delete('/delete/:id', verifyToken, listingController.deleteListing)
 router.get('/get/:id', listingController.getListing )
+router.get('/get', listingController.getListings)
 
 export default router;
